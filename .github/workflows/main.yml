@@ -25,9 +25,9 @@ jobs:
       - name: Tag on Pass
         if: ${{ success() }}
         env:
-          GITHUB_TOKEN: ${{ secrets.TAG_TOKEN }}        
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
         run: |
-          git config --local user.email "wei.cheng@cn.ca"
+          git config --local user.email "goedmonton@gmail.com"
           git config --local user.name "Wei Cheng"
           git config --list
           git tag -a $(date +"%Y%m%d%H%M%S") -m "Test pass"
