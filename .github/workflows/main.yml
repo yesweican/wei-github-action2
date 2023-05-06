@@ -1,0 +1,34 @@
+name: Go Test and Tag
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # every day at midnight
+
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.19
+
+      - name: Run tests
+        run: go test ./...
+        
+      - name: Tag on Pass
+        if: ${{ success() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.TAG_TOKEN }}        
+        run: |
+          git config --local user.email "wei.cheng@cn.ca"
+          git config --local user.name "Wei Cheng"
+          git config --list
+          git tag -a $(date +"%Y%m%d%H%M%S") -m "Test pass"
+          git push --tags
