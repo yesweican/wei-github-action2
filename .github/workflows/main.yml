@@ -23,9 +23,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { context } = github
             const status = process.exitCode === 0 ? 'success' : 'failure';
-            await context.github.repos.createCommitStatus({
+            await github.repos.createCommitStatus({
               ...context.repo,
               sha: context.sha,
               state: status,
