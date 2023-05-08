@@ -1,6 +1,6 @@
 name: Go Test and Tag
 
-on: [ push ]
+on: [ push, workflow_dispatch ]
 
 jobs:
   test:
