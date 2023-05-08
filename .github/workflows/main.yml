@@ -1,4 +1,4 @@
-name: Go Test and Tag
+name: GoTestStatus
 
 on: [ push, workflow_dispatch ]
 
